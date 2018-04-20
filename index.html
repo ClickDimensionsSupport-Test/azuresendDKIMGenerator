@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+
+      function doStuff()
+      {
+        var fromDomain = document.getElementById("domain");
+        var domainText = (fromDomain.value);
+		var storageDomain = document.getElementById("subdomain");
+        var subDomainText = (storageDomain.value);
+		var subDomainElements = document.getElementsByClassName("domain1");
+		for (var i = 0; i < subDomainElements.length; i++) {
+		subDomainElements[i].innerHTML = domainText;
+		}
+		var subDomainElements = document.getElementsByClassName("subdomain1");
+		for (var j = 0; j < subDomainElements.length; j++) {
+		subDomainElements[j].innerHTML = subDomainText;
+		}
+      }
+
+</script>
+</head>
+<body>
+Domain you will be sending from: <br>
+<input id="domain" type="text"> <br>
+SubDomain Used for Record Storage: <br>
+<input id="subdomain" type="text">
+<br><br>
+  <input type="button" value="Generate DNS Records" onClick="doStuff(); alert('Records Generated')"> (Please take care to only click once, refresh page to Start Over)
+  <br><br>
+  Please collect DNS Records Generated below this line: 
+  <br><hr>
+  
+MX Records: <br>
+<span class="subdomain1"></span>.<span class="domain1"></span> MX inbound1.messagegears.net (priority 10)
+<br><br>
+<span class="subdomain1"></span>.<span class="domain1"></span> MX inbound2.messagegears.net (priority 10)
+<br><br><br>
+	
+SPF Records: <br>	
+<span class="domain1"></span> TXT "v=spf1 include:customers.clickdimensions.com -all 
+<br><br>
+<span class="subdomain1"></span>.<span class="domain1"></span> TXT "v=spf1 include:_spf.messagegears.net -all
+<br><br>
+<span class="subdomain1"></span>.<span class="domain1"></span> TXT "spf2.0/pra include:_auth.messagegears.net -all
+<br><br><br>	
+
+DKIM Records: <br>	
+gears._domainkey.<span class="subdomain1"></span>.<span class="domain1"></span> TXT "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnnZ67teJIQQLcfbzztAOx7UMJyFVpz29RX1ZlrV9xf5yJDQyCMCHcwcN5qNaqLMr/cuVzkSW3e1vYqO/9lqfXWkXSgYM8kVeywfubh07vNxTia/5pggiiCPD0+wgSgrMqJFDoKzzFAf+wWwidaHQ9Q9Zel0+w9gWmsi56xt7mRwIDAQAB"
+<br><br>
+gears._domainkey.<span class="domain1"></span> TXT "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnnZ67teJIQQLcfbzztAOx7UMJyFVpz29RX1ZlrV9xf5yJDQyCMCHcwcN5qNaqLMr/cuVzkSW3e1vYqO/9lqfXWkXSgYM8kVeywfubh07vNxTia/5pggiiCPD0+wgSgrMqJFDoKzzFAf+wWwidaHQ9Q9Zel0+w9gWmsi56xt7mRwIDAQAB"
+<br><br>
+_domainkey.<span class="subdomain1"></span>.<span class="domain1"></span> TXT "o=-;"
+<br><br><br>
+
+Note: It is also recommended that you set up a CNAME record on your DNS pointing to ClickDimensions such as the example below. (Please be aware that this must be different than the subdomain used for setting up the MX records and the DKIM signature record.)
+<br>
+elink.<span class="domain1"></span> CNAME elink.clickdimensions.com 
+  
+  <br>
+</body>  
+</html>
